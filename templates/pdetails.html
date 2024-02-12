@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+{% load static %}
+<!--Main start-->
+<div class="row mt-5 mx-auto">
+ {% for x in products %}
+  <div class="col-md-6 mt-5">
+    <img src="{{x.pimage.url}}" width="100%" height="400px">
+  </div>
+  <div class="col-md-6 mt-5">
+    <p><b>Product Name:</b>&nbsp;&nbsp;&nbsp;{{x.name}}</p>
+    <p><b>Price:</b>&nbsp;&nbsp;&nbsp;Rs. {{x.price}}</p>
+    {% if x.cart == 1 %}
+    <p class="card-text"><b>Category:</b>&nbsp;&nbsp;&nbsp;Mobiles</p>
+    {% elif x.cart == 2 %}
+    <p class="card-text"><b>Category:</b>&nbsp;&nbsp;&nbsp;Shoes</p>
+    {% else %}
+    <p class="card-text"><b>Category:</b>&nbsp;&nbsp;&nbsp;Clothes</p>
+    {% endif %}
+    <p><b>Product Description:</b>&nbsp;&nbsp;&nbsp;{{x.pdetails}}</p>
+    <br>
+    <a href="/addtocartt/{{x.id}}" class="btn btn-danger">Add to cart</a>
+    <a href="/viewcart" class="btn btn-danger">View cart</a>
+    <a href="/home" class="btn btn-danger">Shop now</a>
+  </div>  
+ {% endfor %}
+
+ {% if success %}
+   <div class="alert alert-success mt-5">
+       {{success}}
+   </div>
+ {% endif %} 
+
+ {% if errmsg %}
+   <div class="alert alert-danger" mt-5>
+       {{errmsg}}
+   </div>
+ {% endif %}
+</div>
+<!--Main end-->
+
+{% endblock 'main' %}

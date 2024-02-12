@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block 'main' %} 
+{% load static %}
+<!--Cart start-->
+<div class="row mt-5">
+  <div class="col-md-9">
+    {% for x in data %}
+    {% if forloop.counter == 1 %}
+    <h5 class="bg-danger text-white p-2">Customer Details</h5>
+    <p><b>Name:</b>&nbsp;&nbsp;&nbsp;{{x.uid.username}}</p>
+    <p><b>Email:</b>&nbsp;&nbsp;&nbsp;{{x.uid.email}}</p>
+    {% endif %}
+    {% endfor %}
+
+    {% for x in data %}
+    <div class="row">
+      <div class="col-md-4">
+        <img src="{{x.pid.pimage.url}}" width="100%" height="250px">
+      </div>
+      <div class="col-md-8">
+        <p><b>Product Name:</b>&nbsp;&nbsp;&nbsp;{{x.pid.name}}</p>
+        <p><b>Price:</b>&nbsp;&nbsp;&nbsp;Rs. {{x.pid.price}}</p>
+        <p><b>Category:</b>&nbsp;&nbsp;&nbsp;{{x.pid.cart}}</p>
+        <p><b>Product Description:</b>&nbsp;&nbsp;&nbsp;{{x.pid.pdetails}}</p>
+        <p><b>Qty:</b>
+          <a href="/updateqty/0/{{x.id}}"><button class="btn btn-danger">-</button></a>
+          <input type="number" value="{{x.qty}}">
+          <a href="/updateqty/1/{{x.id}}"><button class="btn btn-success">+</button></a>
+          </p>
+          <a href="/remove/{{x.id}}" class="btn btn-danger">Remove</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="col-md-3">
+    <h5 class="bg-danger text-white p-2">Total amount</h5> `
+    <p><b>Total({{items}}):</b>Rs.{{total}}</p>
+    <hr>
+    <p><b>Total amount:</b>Rs.{{total}}</p>
+    <a href="/placeorder"><button class="btn btn-danger">Place oreder</button></a>
+  </div>
+</div>
+<!--Cart end-->
+{% endblock 'main' %}
